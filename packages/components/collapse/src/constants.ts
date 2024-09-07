@@ -1,7 +1,9 @@
+import { type CollapseActiveName, collapseIconPositionTypes } from './collapse'
 import type { InjectionKey, Ref } from 'vue'
-import type { CollapseActiveName } from './collapse'
 
+collapseIconPositionTypes
 export interface CollapseContext {
+  collapseIconPosition: Ref<typeof collapseIconPositionTypes[number]>
   activeNames: Ref<CollapseActiveName[]>
   handleItemClick: (name: CollapseActiveName) => void
 }

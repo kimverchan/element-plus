@@ -22,6 +22,10 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     collapse?.activeNames.value.includes(unref(name))
   )
 
+  const collapseIconPosition = computed(
+    () => collapse?.collapseIconPosition ?? 'right'
+  )
+
   const handleFocus = () => {
     setTimeout(() => {
       if (!isClick.value) {
@@ -47,6 +51,7 @@ export const useCollapseItem = (props: CollapseItemProps) => {
     focusing,
     id,
     isActive,
+    collapseIconPosition,
     handleFocus,
     handleHeaderClick,
     handleEnterClick,
@@ -55,7 +60,12 @@ export const useCollapseItem = (props: CollapseItemProps) => {
 
 export const useCollapseItemDOM = (
   props: CollapseItemProps,
-  { focusing, isActive, id }: Partial<ReturnType<typeof useCollapseItem>>
+  {
+    focusing,
+    isActive,
+    id,
+    collapseIconPosition,
+  }: Partial<ReturnType<typeof useCollapseItem>>
 ) => {
   const ns = useNamespace('collapse')
 
@@ -69,9 +79,11 @@ export const useCollapseItemDOM = (
     ns.is('active', unref(isActive)),
     { focusing: unref(focusing) && !props.disabled },
   ])
+  debugger
   const arrowKls = computed(() => [
     ns.be('item', 'arrow'),
     ns.is('active', unref(isActive)),
+    ns.is('left', collapseIconPosition?.value !== 'right'),
   ])
   const itemWrapperKls = computed(() => ns.be('item', 'wrap'))
   const itemContentKls = computed(() => ns.be('item', 'content'))

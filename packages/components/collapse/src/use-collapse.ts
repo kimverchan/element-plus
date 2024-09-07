@@ -49,6 +49,7 @@ export const useCollapse = (
   provide(collapseContextKey, {
     activeNames,
     handleItemClick,
+    collapseIconPosition: ref(props.collapseIconPosition),
   })
   return {
     activeNames,
